@@ -1,4 +1,9 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC # Execute all notebooks in the current folder
+
+# COMMAND ----------
+
 from pathlib import Path
 
 

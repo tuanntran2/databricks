@@ -1,4 +1,14 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC # Ingest races CSV file
+# MAGIC - Read the races.csv file from the raw container
+# MAGIC - Rename some columns (convert pascal casing to snake casing)
+# MAGIC - Add ingestion_date column with the current timestamp
+# MAGIC - Instead of dropping unwanted columns, select the wanted columns
+# MAGIC - Save the data as parquet file to the processed container
+
+# COMMAND ----------
+
 # MAGIC %run ../utils/utils
 
 # COMMAND ----------
