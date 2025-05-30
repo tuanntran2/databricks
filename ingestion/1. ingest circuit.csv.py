@@ -1,4 +1,15 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC # Ingest circuits CSV file
+# MAGIC
+# MAGIC - Read the circuits.csv file from the raw container
+# MAGIC - Rename some columns (convert pascal casing to snake casing)
+# MAGIC - Add ingestion_date column with the current timestamp
+# MAGIC - Drop the url column
+# MAGIC - Save the data as parquet file to the processed container
+
+# COMMAND ----------
+
 # MAGIC %run ../utils/utils
 
 # COMMAND ----------

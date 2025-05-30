@@ -1,4 +1,14 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC # Ingest results JSON file
+# MAGIC - Read the results.json file from the raw container
+# MAGIC - Rename some columns (convert pascal casing to snake casing)
+# MAGIC - Add ingestion_date column with the current timestamp
+# MAGIC - Drop the statusId column
+# MAGIC - Save the data as parquet file to the processed container
+
+# COMMAND ----------
+
 # MAGIC %run ../utils/utils
 
 # COMMAND ----------
