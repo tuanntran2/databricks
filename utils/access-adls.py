@@ -13,6 +13,16 @@ from pyspark.sql.types import StructType
 
 # COMMAND ----------
 
+def read_text(
+    file_name: str,
+    mount_point: str
+) -> spark_dataframe:
+    return spark.read.text(
+        f"{mount_point}/{file_name}"
+    )
+
+# COMMAND ----------
+
 def read_csv(
     file_name: str,
     mount_point: str,
@@ -23,6 +33,21 @@ def read_csv(
         f"{mount_point}/{file_name}",
         header=True,
         schema=schema,
+    )
+
+# COMMAND ----------
+
+def read_tsv(
+    file_name: str,
+    mount_point: str,
+    schema: StructType=None,
+) -> spark_dataframe:
+
+    return spark.read.csv(
+        f"{mount_point}/{file_name}",
+        header=True,
+        schema=schema,
+        sep='\t',
     )
 
 # COMMAND ----------
@@ -38,6 +63,17 @@ def read_json(
         f"{mount_point}/{file_name}",
         schema=schema,
     )
+
+# COMMAND ----------
+
+def read_png(
+    file_name: str,
+    mount_point: str,
+) -> spark_dataframe:
+
+    return spark.read.format("binaryFile") \
+        .option("mimeType", "image/png") \
+        .load(f"{mount_point}/{file_name}")
 
 # COMMAND ----------
 
