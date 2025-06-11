@@ -163,3 +163,37 @@ def upsert_table(
             data.write.mode("overwrite").partitionBy(partition_by).saveAsTable(f"{table_name}")
     else:
         raise ValueError(f"Invalid mode: {mode}")
+
+# COMMAND ----------
+
+def read_stream(
+    file_name: str,
+    mount_point: str,
+    schema: StructType=None,
+    fmt: str="json"
+) -> spark_dataframe:
+
+    return spark.readStream \
+        .format(fmt) \
+        .schema(schema) \
+        .load(f"{mount_point}/{file_name}")
+
+# COMMAND ----------
+
+"""
+output_mode:
+    "append"   - Write new rows since last micro-batch
+    "complete" - Write entire result
+    "update"   - Write only updated rows since last micro-batch
+"""
+
+def write_stream(
+    data: spark_dataframe,
+    table_name: str,
+    checkpoint: str = None,
+    output_mode: str = "append"
+):
+    writer = data.writeStream.format("delta")
+    if checkpoint:
+        writer = writer.option("checkpointLocation", checkpoint)
+    return writer.toTable(table_name)

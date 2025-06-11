@@ -10,7 +10,6 @@
 
 gizmobox_mount_point = mount_adls("gizmobox")
 
-
 # COMMAND ----------
 
 data = read_json("landing/operational_data/customers", gizmobox_mount_point)
